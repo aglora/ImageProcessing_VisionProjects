@@ -1,0 +1,307 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>formacionImagen</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-10-30"><meta name="DC.source" content="formacionImagen.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">PAR&Aacute;METROS (experimentos)</a></li><li><a href="#3">DEFINICI&Oacute;N DEL OBJETO (Puntos a proyectar)</a></li><li><a href="#4">PAR&Aacute;METROS DE LA C&Aacute;MARA</a></li><li><a href="#5">POSICI&Oacute;N RELATIVA ENTRE C&Aacute;MARA Y OBJETO</a></li><li><a href="#6">Proyecci&oacute;n de los puntos del objeto a la imagen</a></li><li><a href="#7">Representaciones</a></li></ul></div><pre class="codeinput">clear <span class="string">all</span>; close <span class="string">all</span>; clc;
+</pre><h2 id="2">PAR&Aacute;METROS (experimentos)</h2><pre class="codeinput"><span class="comment">% Activaci&oacute;n de efectos de distorsion</span>
+distorsion=1; <span class="comment">% 0 == No distorsi&oacute;n || 1 == Distorsi&oacute;n</span>
+
+<span class="comment">%Posici&oacute;n y orientaci&oacute;n relativa de {C} respecto a {W}</span>
+dx=3;       <span class="comment">%Distancia entre c&aacute;mara y objeto respecto x_w</span>
+dy=1.5;     <span class="comment">%Distancia entre c&aacute;mara y objeto respecto y_w</span>
+dz=10;      <span class="comment">%Distancia entre c&aacute;mara y objeto respecto z_w</span>
+psi   = 0;  <span class="comment">% &Aacute;ngulo de rotaci&oacute;n respecto a eje Z.</span>
+theta = 0;  <span class="comment">% &Aacute;ngulo de rotaci&oacute;n respecto a eje Y'.</span>
+phi   = pi; <span class="comment">% &Aacute;ngulo de rotaci&oacute;n respecto a eje X''.</span>
+</pre><h2 id="3">DEFINICI&Oacute;N DEL OBJETO (Puntos a proyectar)</h2><pre class="codeinput">nx=13;  <span class="comment">%N&uacute;mero de posiciones en x</span>
+ny=7;   <span class="comment">%N&uacute;mero de posiciones en y</span>
+nt=nx*ny; <span class="comment">%N&uacute;mero total de puntos</span>
+inc_x=0.5; <span class="comment">%distancia entre puntos en x (ejes W)</span>
+inc_y=0.5; <span class="comment">%distancia entre puntos en y (ejes W)</span>
+MP=zeros(3,nx*ny); <span class="comment">%Matriz de puntos respecto a W</span>
+
+x=0;y=0;k=1;
+<span class="keyword">for</span> j=1:ny
+    <span class="keyword">for</span> i=1:nx
+        MP(1,k)=x;
+        MP(2,k)=y;
+        MP(3,k)=0;
+        x=x+inc_x;
+        k=k+1;
+    <span class="keyword">end</span>
+    y=y+inc_y;
+    x=0;
+<span class="keyword">end</span>
+</pre><h2 id="4">PAR&Aacute;METROS DE LA C&Aacute;MARA</h2><pre class="codeinput">f = 0.0042; <span class="comment">%Distancia focal</span>
+N = 4128;   <span class="comment">%Resoluci&oacute;n de la imagen (ancho)</span>
+M = 3096;   <span class="comment">%Resoluci&oacute;n de la imagen (alto)</span>
+anchoSensor = 0.00496;  <span class="comment">%Tama&ntilde;o del sensor (ancho)</span>
+altoSensor  = 0.00352;  <span class="comment">%Tama&ntilde;o del sensor (alto)</span>
+rho_x = anchoSensor/N;  <span class="comment">%Dimensi&oacute;n efectiva del p&iacute;xel (horizontal)</span>
+rho_y = altoSensor/M;   <span class="comment">%Dimensi&oacute;n efectiva del p&iacute;xel (vertical)</span>
+fx = f/rho_x;   <span class="comment">%Longitud focal efectiva horizontal</span>
+fy = f/rho_y;   <span class="comment">%Longitud focal efectiva vertical</span>
+s = 0;   <span class="comment">% Skew</span>
+u0 = round(N/2)+1;  <span class="comment">%Punto principal horizontal de la imagen</span>
+v0 = round(M/2)-2;  <span class="comment">%Punto principal vertical de la imagen</span>
+
+<span class="comment">%Coeficientes de distorsion radial</span>
+kr1=0.144*20; kr2=-0.307*10;
+
+<span class="comment">%Coeficientes de distorsion tangencial</span>
+kt1=-0.0032; kt2=0.0017;
+
+<span class="comment">% Matriz de proyecci&oacute;n simple:</span>
+Kf = [ f 0 0 0
+       0 f 0 0
+       0 0 1 0 ];
+
+<span class="comment">% Matriz de par&aacute;metros intr&iacute;secos:</span>
+K = [ fx  s*fx   u0
+       0    fy   v0
+       0     0    1 ];
+</pre><h2 id="5">POSICI&Oacute;N RELATIVA ENTRE C&Aacute;MARA Y OBJETO</h2><pre class="codeinput"><span class="comment">% Posici&oacute;n del origen de {C} respecto al sistema {W}:</span>
+wtc = [dx,dy,dz]';
+
+<span class="comment">% Orientaci&oacute;n {C} respecto al sistema {W}. En general dada por sucesi&oacute;n de tres giros (convenio ZYX ejes m&oacute;viles):</span>
+
+Rz = [ cos(psi) -sin(psi) 0
+       sin(psi)  cos(psi) 0
+           0         0    1 ];
+
+Ry = [ cos(theta) 0 sin(theta)
+           0      1    0
+      -sin(theta) 0 cos(theta) ];
+
+Rx = [ 1    0        0
+       0 cos(phi) -sin(phi)
+       0 sin(phi)  cos(phi) ];
+
+wRc = Rz*Ry*Rx; <span class="comment">% Matriz de rotaci&oacute;n {C} a {W}</span>
+
+wTc = [wRc wtc; [0 0 0 1]]; <span class="comment">% Matriz de transformaci&oacute;n homog&eacute;nea {C} a {W}</span>
+
+<span class="comment">% Obtenemos cTm a partir de wTc obteniendo su inversa</span>
+<span class="comment">%cTw = inv(wTc); % Matriz de transformaci&oacute;n homog&eacute;nea {W} a {C}</span>
+cTw = [wRc', -wRc'*wtc; [0 0 0 1]]; <span class="comment">% Forma m&aacute;s eficiente</span>
+cRw = cTw(1:3,1:3); <span class="comment">% Matriz de rotaci&oacute;n de la transformaci&oacute;n {W} a {C}</span>
+ctw = cTw(1:3,4);   <span class="comment">% Vector de traslaci&oacute;n de la transformaci&oacute;n {W} a {C}</span>
+</pre><h2 id="6">Proyecci&oacute;n de los puntos del objeto a la imagen</h2><pre class="codeinput"><span class="comment">%CON DISTORSI&Oacute;N</span>
+<span class="keyword">if</span>(distorsion==1)
+    MP_ = [MP ; ones(1,nt)]; <span class="comment">%Matriz de puntos en homogeneas</span>
+    mpc_ = Kf * cTw * MP_ ;  <span class="comment">%Matriz de puntos en coordenadas homogeneas respecto a {C}</span>
+    mpc(1:2,:)= mpc_(1:2,:)./mpc_(3,:); <span class="comment">%Matriz de puntos en coordenadas estandar respecto a {C}</span>
+    mpDist = zeros(size(mpc));
+    <span class="keyword">for</span> i=1:nt
+        pNorm = mpc(:,i)/f;  <span class="comment">%Pasa el punto a coordenadas proyectadas normalizadas</span>
+        r = norm(pNorm);     <span class="comment">%C&aacute;lculo del radio</span>
+        deltaR = 1 + kr1*r^2 + kr2*r^4; <span class="comment">% Distorsion radial</span>
+        deltaTx=2*kt1*pNorm(1)*pNorm(2)+kt2*(r^2+2*pNorm(1)^2); <span class="comment">% Distorsion tangencial en x</span>
+        deltaTy=2*kt2*pNorm(1)*pNorm(2)+kt1*(r^2+2*pNorm(2)^2); <span class="comment">% Distorsion tangencial en y</span>
+        mpDist(:,i) = ((pNorm * deltaR) + [deltaTx ; deltaTy])*f; <span class="comment">% Matriz de puntos distorsionados</span>
+    <span class="keyword">end</span>
+    mp(1,:)= round(mpDist(1,:)/rho_x + ones(1,nt)*u0); <span class="comment">% Discretizacion de los puntos de la imagen</span>
+    mp(2,:)= round(mpDist(2,:)/rho_y + ones(1,nt)*v0); <span class="comment">% Discretizacion de los puntos de la imagen</span>
+
+<span class="comment">%SIN DISTORSI&Oacute;N</span>
+<span class="keyword">elseif</span>(distorsion==0)
+    MP_ = [MP ; ones(1,nt)]; <span class="comment">%Matriz de puntos en homogeneas</span>
+    mp_ = K * [cRw ctw] * MP_ ; <span class="comment">%Matriz de puntos en coordenadas homogeneas respecto a {C} (en pixeles)</span>
+    mp(1:2,:)= round(mp_(1:2,:)./mp_(3,:)); <span class="comment">%Matriz de puntos en coordenadas estandar respecto a {C} (en pixeles)</span>
+<span class="keyword">end</span>
+</pre><h2 id="7">Representaciones</h2><pre class="codeinput">figura3d(MP(1,:),MP(2,:),MP(3,:),wTc) <span class="comment">%Objeto y C&aacute;mara en el espacio</span>
+figuraImagen(mp(1,:),mp(2,:),M,N,nx,ny) <span class="comment">%Imagen generada en la c&aacute;mara</span>
+</pre><img vspace="5" hspace="5" src="formacionImagen_01.png" alt=""> <img vspace="5" hspace="5" src="formacionImagen_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all; close all; clc;
+%% PARÁMETROS (experimentos)
+
+% Activación de efectos de distorsion
+distorsion=1; % 0 == No distorsión || 1 == Distorsión
+
+%Posición y orientación relativa de {C} respecto a {W}
+dx=3;       %Distancia entre cámara y objeto respecto x_w
+dy=1.5;     %Distancia entre cámara y objeto respecto y_w
+dz=10;      %Distancia entre cámara y objeto respecto z_w
+psi   = 0;  % Ángulo de rotación respecto a eje Z.
+theta = 0;  % Ángulo de rotación respecto a eje Y'.
+phi   = pi; % Ángulo de rotación respecto a eje X''.
+
+%% DEFINICIÓN DEL OBJETO (Puntos a proyectar)
+
+nx=13;  %Número de posiciones en x
+ny=7;   %Número de posiciones en y
+nt=nx*ny; %Número total de puntos
+inc_x=0.5; %distancia entre puntos en x (ejes W)
+inc_y=0.5; %distancia entre puntos en y (ejes W)
+MP=zeros(3,nx*ny); %Matriz de puntos respecto a W
+
+x=0;y=0;k=1;
+for j=1:ny
+    for i=1:nx
+        MP(1,k)=x;
+        MP(2,k)=y;
+        MP(3,k)=0;
+        x=x+inc_x;
+        k=k+1;
+    end
+    y=y+inc_y;
+    x=0;
+end
+
+%% PARÁMETROS DE LA CÁMARA
+
+f = 0.0042; %Distancia focal
+N = 4128;   %Resolución de la imagen (ancho)
+M = 3096;   %Resolución de la imagen (alto)
+anchoSensor = 0.00496;  %Tamaño del sensor (ancho)
+altoSensor  = 0.00352;  %Tamaño del sensor (alto)
+rho_x = anchoSensor/N;  %Dimensión efectiva del píxel (horizontal)
+rho_y = altoSensor/M;   %Dimensión efectiva del píxel (vertical)
+fx = f/rho_x;   %Longitud focal efectiva horizontal
+fy = f/rho_y;   %Longitud focal efectiva vertical
+s = 0;   % Skew
+u0 = round(N/2)+1;  %Punto principal horizontal de la imagen
+v0 = round(M/2)-2;  %Punto principal vertical de la imagen
+
+%Coeficientes de distorsion radial
+kr1=0.144*20; kr2=-0.307*10;
+
+%Coeficientes de distorsion tangencial
+kt1=-0.0032; kt2=0.0017;
+
+% Matriz de proyección simple:
+Kf = [ f 0 0 0 
+       0 f 0 0
+       0 0 1 0 ];
+
+% Matriz de parámetros intrísecos:
+K = [ fx  s*fx   u0
+       0    fy   v0
+       0     0    1 ];
+ 
+%% POSICIÓN RELATIVA ENTRE CÁMARA Y OBJETO
+
+% Posición del origen de {C} respecto al sistema {W}:
+wtc = [dx,dy,dz]';
+
+% Orientación {C} respecto al sistema {W}. En general dada por sucesión de tres giros (convenio ZYX ejes móviles):
+
+Rz = [ cos(psi) -sin(psi) 0
+       sin(psi)  cos(psi) 0
+           0         0    1 ];
+      
+Ry = [ cos(theta) 0 sin(theta)
+           0      1    0
+      -sin(theta) 0 cos(theta) ];           
+
+Rx = [ 1    0        0
+       0 cos(phi) -sin(phi) 
+       0 sin(phi)  cos(phi) ];
+
+wRc = Rz*Ry*Rx; % Matriz de rotación {C} a {W}
+
+wTc = [wRc wtc; [0 0 0 1]]; % Matriz de transformación homogénea {C} a {W}
+
+% Obtenemos cTm a partir de wTc obteniendo su inversa
+%cTw = inv(wTc); % Matriz de transformación homogénea {W} a {C}
+cTw = [wRc', -wRc'*wtc; [0 0 0 1]]; % Forma más eficiente
+cRw = cTw(1:3,1:3); % Matriz de rotación de la transformación {W} a {C}
+ctw = cTw(1:3,4);   % Vector de traslación de la transformación {W} a {C}
+
+%% Proyección de los puntos del objeto a la imagen
+
+%CON DISTORSIÓN
+if(distorsion==1)
+    MP_ = [MP ; ones(1,nt)]; %Matriz de puntos en homogeneas
+    mpc_ = Kf * cTw * MP_ ;  %Matriz de puntos en coordenadas homogeneas respecto a {C} 
+    mpc(1:2,:)= mpc_(1:2,:)./mpc_(3,:); %Matriz de puntos en coordenadas estandar respecto a {C}
+    mpDist = zeros(size(mpc));
+    for i=1:nt
+        pNorm = mpc(:,i)/f;  %Pasa el punto a coordenadas proyectadas normalizadas
+        r = norm(pNorm);     %Cálculo del radio 
+        deltaR = 1 + kr1*r^2 + kr2*r^4; % Distorsion radial
+        deltaTx=2*kt1*pNorm(1)*pNorm(2)+kt2*(r^2+2*pNorm(1)^2); % Distorsion tangencial en x
+        deltaTy=2*kt2*pNorm(1)*pNorm(2)+kt1*(r^2+2*pNorm(2)^2); % Distorsion tangencial en y
+        mpDist(:,i) = ((pNorm * deltaR) + [deltaTx ; deltaTy])*f; % Matriz de puntos distorsionados
+    end
+    mp(1,:)= round(mpDist(1,:)/rho_x + ones(1,nt)*u0); % Discretizacion de los puntos de la imagen
+    mp(2,:)= round(mpDist(2,:)/rho_y + ones(1,nt)*v0); % Discretizacion de los puntos de la imagen
+
+%SIN DISTORSIÓN
+elseif(distorsion==0)
+    MP_ = [MP ; ones(1,nt)]; %Matriz de puntos en homogeneas
+    mp_ = K * [cRw ctw] * MP_ ; %Matriz de puntos en coordenadas homogeneas respecto a {C} (en pixeles)
+    mp(1:2,:)= round(mp_(1:2,:)./mp_(3,:)); %Matriz de puntos en coordenadas estandar respecto a {C} (en pixeles)
+end
+%% Representaciones
+
+figura3d(MP(1,:),MP(2,:),MP(3,:),wTc) %Objeto y Cámara en el espacio
+figuraImagen(mp(1,:),mp(2,:),M,N,nx,ny) %Imagen generada en la cámara
+##### SOURCE END #####
+--></body></html>
