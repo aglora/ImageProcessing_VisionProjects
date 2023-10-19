@@ -37,9 +37,9 @@ En cada carpeta asociada a cada proyecto puede verse los códigos realizados en 
 - **ReconocimientoMatrículas**: Reconocimiento de dígitos de una matrícula por medio de la separación de regiones de objetos e implmentación de clasificadores discriminantes de Bayes y Mínima distancia.
 
 <div style="display: flex; flex-direction: row;">
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/14.png" width="400" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/13.png" width="400" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/12.png" width="400" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/14.png" width="300" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/13.png" width="300" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/12.png" width="300" />
 </div>
 
 ## Authors
