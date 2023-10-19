@@ -7,9 +7,9 @@ En cada carpeta asociada a cada proyecto puede verse los códigos realizados en 
 - **FormacionImagen**: Proyectamos puntos 3d en plano de la imagen aplicando el modelo proyectivo de cámara, incluyendo distorsiones.
 
 <div style="display: flex; flex-direction: row;">
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/1.png" width="300" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/2.png" width="300" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/3.png" width="300" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/1.png" width="500" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/2.png" width="500" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/3.png" width="500" />
 </div>
 
 - **SegmentacionColor**: Identificación y separación de objetos por colores y extracción de características de cada objeto individualizado.
@@ -30,16 +30,16 @@ En cada carpeta asociada a cada proyecto puede verse los códigos realizados en 
 - **DeteccionCalzada**: Identificación de zona perteneciente a la calzada en una secuencia larga de imágenes mediante Transformada de Heugh aplicada para tratamiento de líneas rectas.
 
 <div style="display: flex; flex-direction: row;">
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/10.png" width="500" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/11.png" width="300" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/10.png" width="600" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/11.png" width="600" />
 </div>
 
 - **ReconocimientoMatrículas**: Reconocimiento de dígitos de una matrícula por medio de la separación de regiones de objetos e implmentación de clasificadores discriminantes de Bayes y Mínima distancia.
 
 <div style="display: flex; flex-direction: row;">
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/14.png" width="300" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/13.png" width="300" />
-  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/12.png" width="300" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/14.png" width="400" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/13.png" width="400" />
+  <img src="https://github.com/aglora/ImageProcessing_VisionProjects/blob/main/imgs/12.png" width="600" />
 </div>
 
 ## Authors
